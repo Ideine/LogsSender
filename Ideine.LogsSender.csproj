@@ -12,7 +12,7 @@
         <Authors>Valentin Jubert</Authors>
         <Description>Logs sender for ElasticSearch</Description>
         <Copyright>Copyright 2019</Copyright>
-        <PackageLicenseUrl>https://github.com/Ideine/LogsSender/LICENSE</PackageLicenseUrl>
+        <PackageLicense>https://github.com/Ideine/LogsSender/LICENSE</PackageLicense>
         <PackageProjectUrl>https://github.com/Ideine/LogsSender</PackageProjectUrl>
         <PackageTags>logs;elasticsearch</PackageTags>
     </PropertyGroup>

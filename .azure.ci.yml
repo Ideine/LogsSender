@@ -25,7 +25,7 @@ steps:
   displayName: 'Build solution **/*.sln'
   inputs:
     configuration: Release
-    msbuildArguments: '/t:Restore;Build;Pack /p:PackageOutputPath="../artifacts/"'
+    msbuildArguments: '/t:Restore;Build;Pack /p:PackageOutputPath="artifacts/"'
 
 - task: CopyFiles@2
   displayName: "Copy Files to: $(build.artifactstagingdirectory)"
