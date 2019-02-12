@@ -4,8 +4,21 @@
         <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <PackageVersion>0.1.0</PackageVersion>
+        <PackageId>Ideine.LogsSender</PackageId>
+        <Title>Ideine.LogsSender</Title>
+        <Authors>Valentin Jubert</Authors>
+        <Description>Logs sender for ElasticSearch</Description>
+        <Copyright>Copyright 2019</Copyright>
+        <PackageLicenseUrl>https://github.com/Ideine/LogsSender/LICENSE</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/Ideine/LogsSender</PackageProjectUrl>
+        <PackageTags>logs;elasticsearch</PackageTags>
+    </PropertyGroup>
+
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.1"/>
     </ItemGroup>
 
 </Project>
