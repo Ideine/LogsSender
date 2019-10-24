@@ -1,6 +1,6 @@
 # Ideine.LogsSender 
 
-![Nuget](https://img.shields.io/nuget/v/Ideine.LogsSender)
+[![Nuget](https://img.shields.io/nuget/v/Ideine.LogsSender)](https://www.nuget.org/packages/Ideine.LogsSender/)
 
 
 LogsSender is an abstraction to upload some logs on an ElasticSearch client.
