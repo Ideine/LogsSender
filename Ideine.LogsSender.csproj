@@ -6,13 +6,14 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <PackageVersion>0.1.0</PackageVersion>
+        <PackageVersion>0.1.1</PackageVersion>
         <PackageId>Ideine.LogsSender</PackageId>
         <Title>Ideine.LogsSender</Title>
         <Authors>Valentin Jubert</Authors>
         <Description>Logs sender for ElasticSearch</Description>
         <Copyright>Copyright 2019</Copyright>
-        <PackageLicense>https://github.com/Ideine/LogsSender/LICENSE</PackageLicense>
+        <PackageLicenseUrl>https://github.com/Ideine/LogsSender/LICENSE</PackageLicenseUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageProjectUrl>https://github.com/Ideine/LogsSender</PackageProjectUrl>
         <PackageTags>logs;elasticsearch</PackageTags>
     </PropertyGroup>
