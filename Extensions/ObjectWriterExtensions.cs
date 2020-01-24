@@ -20,7 +20,23 @@ namespace Ideine.LogsSender.Extensions
 
 		private static void InternalWriteException(IObjectWriter writer, Exception exception)
 		{
-			writer.WriteProperty("message", exception.Message).WriteProperty("stacktrace", exception.StackTrace);
+			try
+			{
+				writer.WriteProperty("message", exception.Message);
+			}
+			catch (Exception)
+			{
+				writer.WriteProperty("message", "Exception caught during writing Message");
+			}
+
+			try
+			{
+				writer.WriteProperty("stacktrace", exception.StackTrace);
+			}
+			catch (Exception)
+			{
+				writer.WriteProperty("stacktrace", "Exception caught during writing StackTrace");
+			}
 
 			if (exception is AggregateException aggregateException)
 			{
