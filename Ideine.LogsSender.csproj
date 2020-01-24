@@ -6,7 +6,7 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <PackageVersion>0.1.1</PackageVersion>
+        <PackageVersion>0.1.2</PackageVersion>
         <PackageId>Ideine.LogsSender</PackageId>
         <Title>Ideine.LogsSender</Title>
         <Authors>Valentin Jubert</Authors>
