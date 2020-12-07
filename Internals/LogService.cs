@@ -6,11 +6,11 @@ namespace Ideine.LogsSender.Internals
 {
 	internal class LogService : ILogService
 	{
-		private readonly ILogSender _sender;
+		private readonly ILogQueueSender _sender;
 		private readonly LogLevel _minimumLogLevel;
 		private readonly List<ILogAppender> _appenders = new List<ILogAppender>();
 
-		public LogService(ILogSender sender, LogLevel minimumLogLevel)
+		public LogService(ILogQueueSender sender, LogLevel minimumLogLevel)
 		{
 			_sender = sender;
 			_minimumLogLevel = minimumLogLevel;

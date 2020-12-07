@@ -1,18 +1,16 @@
-﻿using System;
-using System.Net.Http;
-using System.Text;
+﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ideine.LogsSender.Extensions;
 using Ideine.LogsSender.Interfaces;
 using Ideine.LogsSender.Internals;
+using Ideine.LogsSender.Senders.HttpSenders;
 
-namespace Ideine.LogsSender.Senders
+namespace Ideine.LogsSender.Senders.Queues
 {
-	internal class BufferedLogSender : ILogSender
+	internal class BufferedLogSender : ILogQueueSender
 	{
-		private readonly HttpClient _client;
-		private readonly string _url;
+		private readonly IHttpSender _sender;
 		private readonly ILogBufferStorage _storage;
 		private readonly int _bufferSize;
 
@@ -42,10 +40,9 @@ namespace Ideine.LogsSender.Senders
 
 		private readonly ExponentialBackOffStrategy _backOffStrategy;
 
-		public BufferedLogSender(HttpClient client, string url, ILogBufferStorage storage, int bufferSize)
+		public BufferedLogSender(IHttpSender sender, ILogBufferStorage storage, int bufferSize)
 		{
-			_client = client;
-			_url = url;
+			_sender = sender;
 			_storage = storage;
 			_bufferSize = bufferSize;
 
@@ -78,7 +75,7 @@ namespace Ideine.LogsSender.Senders
 						contentToSend = _waitingContent.ToString();
 					}
 
-					if (await Send(contentToSend))
+					if (await _sender.Send(contentToSend))
 					{
 						using (await _stringBuilderMutex.LockAsync())
 						{
@@ -125,26 +122,6 @@ namespace Ideine.LogsSender.Senders
 		private void StoreBuffer(string bufferContent)
 		{
 			_storage.Save(bufferContent);
-		}
-
-		private async Task<bool> Send(string content)
-		{
-			try
-			{
-				using (var stringContent = new StringContent(content, Encoding.UTF8, "text/plain"))
-				using (var result = await _client.PostAsync(_url, stringContent))
-				{
-					return result.IsSuccessStatusCode;
-					//TODO quid du cas où les logs sont mal formés ?
-				}
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Trace.WriteLine("IDEINE.LOGSSENDER : Exception while sending logs :");
-				System.Diagnostics.Trace.WriteLine(ex);
-			}
-
-			return false;
 		}
 	}
 }

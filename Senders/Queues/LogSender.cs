@@ -1,18 +1,18 @@
-﻿using System;
-using System.Net.Http;
-using System.Text;
+﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ideine.LogsSender.Extensions;
 using Ideine.LogsSender.Interfaces;
 using Ideine.LogsSender.Internals;
+using Ideine.LogsSender.Senders.HttpSenders;
 
-namespace Ideine.LogsSender.Senders
+namespace Ideine.LogsSender.Senders.Queues
 {
-	internal class LogSender : ILogSender
+	internal class LogQueueSender : ILogQueueSender
 	{
-		private readonly HttpClient _client;
-		private readonly string _url;
+		//private readonly HttpClient _client;
+		//private readonly string _url;
+		private readonly IHttpSender _sender;
 		private readonly ILogBufferStorage _storage;
 		private readonly BackgroundWorker _worker;
 
@@ -40,10 +40,11 @@ namespace Ideine.LogsSender.Senders
 
 		private readonly ExponentialBackOffStrategy _backOffStrategy;
 
-		public LogSender(HttpClient client, string url, ILogBufferStorage storage)
+		public LogQueueSender(/*HttpClient client, string url, */ IHttpSender sender, ILogBufferStorage storage)
 		{
-			_client = client;
-			_url = url;
+			//_client = client;
+			//_url = url;
+			_sender = sender;
 			_storage = storage;
 
 			_backOffStrategy = new ExponentialBackOffStrategy(5000, 4);
@@ -93,7 +94,7 @@ namespace Ideine.LogsSender.Senders
 						contentToSend = _waitingContent.ToString();
 					}
 
-					if (await Send(contentToSend))
+					if (await _sender.Send(contentToSend))
 					{
 						using (await _stringBuilderMutex.LockAsync())
 						{
@@ -125,36 +126,6 @@ namespace Ideine.LogsSender.Senders
 		private void StoreBuffer(string bufferContent)
 		{
 			_storage.Save(bufferContent);
-		}
-
-		/// <summary>
-		/// S'occupe de l'envoie au serveur de logs
-		/// </summary>
-		/// <param name="content">Logs à envoyer</param>
-		/// <returns>Indique si tout s'est bien passé</returns>
-		private async Task<bool> Send(string content)
-		{
-			if (string.IsNullOrEmpty(content))
-			{
-				return true;
-			}
-			
-			try
-			{
-				using (var stringContent = new StringContent(content, Encoding.UTF8, "text/plain"))
-				using (var response = await _client.PostAsync(_url, stringContent))
-				{
-					return response.IsSuccessStatusCode;
-					//TODO quid du cas où les logs sont mal formés ?
-				}
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Trace.WriteLine("IDEINE.LOGSSENDER : Exception while sending logs :");
-				System.Diagnostics.Trace.WriteLine(ex);
-			}
-
-			return false;
 		}
 	}
 }
