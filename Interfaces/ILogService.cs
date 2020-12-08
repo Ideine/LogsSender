@@ -2,7 +2,7 @@ using System;
 
 namespace Ideine.LogsSender.Interfaces
 {
-	internal interface ILogService
+	public interface ILogService
 	{
 		void Log(LogLevel level, string index, string type, Action<IObjectWriter> fillLogEntry);
 
