@@ -25,11 +25,7 @@ namespace Ideine.LogsSender
 
 		internal static IContextLogService CreateCustom(string index, string type, ILogService logService)
 		{
-			return new ContextLogService(
-				logService,
-				index,
-				type
-			).WithAppender(new TimestampLogAppender());
+			return new ContextLogService(logService, index, type).WithAppender(new TimestampLogAppender());
 		}
 	}
 }

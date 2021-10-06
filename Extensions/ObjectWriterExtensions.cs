@@ -22,6 +22,15 @@ namespace Ideine.LogsSender.Extensions
 		{
 			try
 			{
+				writer.WriteProperty("type", exception.GetType().FullName);
+			}
+			catch (Exception)
+			{
+				writer.WriteProperty("type", "Exception caught during writing Type");
+			}
+
+			try
+			{
 				writer.WriteProperty("message", exception.Message);
 			}
 			catch (Exception)
