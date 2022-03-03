@@ -4,9 +4,9 @@ using System.IO;
 using Ideine.LogsSender.Interfaces;
 using Newtonsoft.Json;
 
-namespace Ideine.LogsSender.Internals
+namespace Ideine.LogsSender.LogWriters
 {
-	internal class JsonLogWriter : IObjectWriter, IArrayWriter
+	public class JsonLogWriter : IObjectWriter, IArrayWriter
 	{
 		private readonly bool _extraLine;
 		private readonly StringWriter _textWriter = new StringWriter();
@@ -16,7 +16,7 @@ namespace Ideine.LogsSender.Internals
 		{
 			_extraLine = extraLine;
 
-			_jsonWriter = new JsonTextWriter(_textWriter) {Formatting = formatting};
+			_jsonWriter = new JsonTextWriter(_textWriter) { Formatting = formatting };
 			_jsonWriter.WriteStartObject();
 		}
 
