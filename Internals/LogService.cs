@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ideine.LogsSender.Interfaces;
+using Ideine.LogsSender.LogWriters;
 
 namespace Ideine.LogsSender.Internals
 {
