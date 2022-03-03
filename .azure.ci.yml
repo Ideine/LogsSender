@@ -7,33 +7,19 @@ trigger:
 
 name: LogsSender-CI-$(SourceBranchName)-$(Date:yyyyMMdd)$(Rev:.r)
 
-queue:
-  name: Hosted VS2017
+pool:
+  vmImage: windows-latest
 
 steps:
-- task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 4.7.x'
-  inputs:
-    versionSpec: 4.7.x
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'pack'
+      packagesToPack: 'Ideine.LogsSender.csproj'
+      configuration: 'Release'
+      versioningScheme: 'off'
+    condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/develop'))
 
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
-  inputs:
-    restoreSolution: 'Ideine.LogsSender.sln'
 
-- task: MSBuild@1
-  displayName: 'Build solution **/*.sln'
-  inputs:
-    configuration: Release
-    msbuildArguments: '/t:Restore;Build;Pack /p:PackageOutputPath="artifacts/"'
-
-- task: CopyFiles@2
-  displayName: "Copy Files to: $(build.artifactstagingdirectory)"
-  inputs:
-    SourceFolder: artifacts
-    TargetFolder: '$(build.artifactstagingdirectory)'
-  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/develop')) 
-
-- task: PublishBuildArtifacts@1
-  displayName: "Publish Artifact: drop"
-  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/develop')) 
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifact: drop"
+    condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master', 'refs/heads/develop')) 

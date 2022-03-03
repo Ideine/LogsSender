@@ -5,7 +5,7 @@ using Ideine.LogsSender.LogWriters;
 
 namespace Ideine.LogsSender.Internals
 {
-	internal class LogService : ILogService
+	public class LogService : ILogService
 	{
 		private readonly ILogQueueSender _sender;
 		private readonly LogLevel _minimumLogLevel;
