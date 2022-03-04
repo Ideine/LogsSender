@@ -17,5 +17,10 @@ namespace Ideine.LogsSender.Senders.Queues
 		{
 			return _client.Send(entry);
 		}
+
+		protected override Task<bool> Send(string rawEntry)
+		{
+			return _client.Send(rawEntry);
+		}
 	}
 }

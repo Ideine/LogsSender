@@ -8,10 +8,12 @@ namespace Ideine.LogsSender.Senders.Queues
 	public abstract class BaseBufferedBackOffQueueLogSender : ILogQueueSender
 	{
 		private readonly BufferedBackgroundExponentialQueueWorker<ILogEntry> _worker;
+		private readonly BufferedBackgroundExponentialQueueWorker<string> _rawWorker;
 
 		protected BaseBufferedBackOffQueueLogSender()
 		{
 			_worker = new BufferedBackgroundExponentialQueueWorker<ILogEntry>(Send);
+			_rawWorker = new BufferedBackgroundExponentialQueueWorker<string>(Send);
 		}
 
 		public void Enqueue(ILogEntry entry)
@@ -19,6 +21,12 @@ namespace Ideine.LogsSender.Senders.Queues
 			_worker.Queue(entry);
 		}
 
+        public void Enqueue(string rawEntry)
+        {
+			_rawWorker.Queue(rawEntry);
+		}
+
 		protected abstract Task<bool> Send(IReadOnlyList<ILogEntry> entries);
+		protected abstract Task<bool> Send(IReadOnlyList<string> rawEntries);
 	}
 }

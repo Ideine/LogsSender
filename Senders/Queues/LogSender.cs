@@ -80,6 +80,24 @@ namespace Ideine.LogsSender.Senders.Queues
 			_worker.Start();
 		}
 
+		public async void Enqueue(string rawEntry)
+		{
+			using (await _stringBuilderMutex.LockAsync())
+			{
+				//si le buffer était vide, on peut relancer l'envoie des logs
+				if (_waitingContent.Length == 0)
+				{
+					_contentSemaphore.Release();
+				}
+
+				_waitingContent.AppendLine(rawEntry);
+
+				StoreBuffer(_waitingContent.ToString());
+			}
+
+			_worker.Start();
+		}
+
 		private async Task RunAsync()
 		{
 			while (true)

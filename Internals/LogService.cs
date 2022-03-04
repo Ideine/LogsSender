@@ -45,5 +45,10 @@ namespace Ideine.LogsSender.Internals
 			var entry = new LogEntry(index, type, json);
 			_sender.Enqueue(entry);
 		}
+
+		public void LogRaw(string rawEntry)
+        {
+			_sender.Enqueue(rawEntry);
+		}
 	}
 }

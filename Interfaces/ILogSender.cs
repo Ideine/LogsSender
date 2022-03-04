@@ -10,5 +10,7 @@ namespace Ideine.LogsSender.Interfaces
 	public interface ILogQueueSender
 	{
 		void Enqueue(ILogEntry entry);
+
+		void Enqueue(string rawEntry);
 	}
 }

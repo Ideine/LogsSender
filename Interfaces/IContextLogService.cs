@@ -6,6 +6,8 @@ namespace Ideine.LogsSender.Interfaces
 	{
 		void Log(LogLevel level, Action<IObjectWriter> fillLogEntry);
 
+		void LogRaw(string rawEntry);
+
 		IContextLogService WithAppender(ILogAppender appender);
 	}
 }
