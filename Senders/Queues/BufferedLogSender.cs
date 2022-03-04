@@ -119,6 +119,26 @@ namespace Ideine.LogsSender.Senders.Queues
 			_worker.Start();
 		}
 
+		public async void Enqueue(string rawJsonEntry)
+		{
+			int count;
+			using (await _stringBuilderMutex.LockAsync())
+			{
+				_waitingContent.AppendLine(rawJsonEntry);
+
+				StoreBuffer(_waitingContent.ToString());
+
+				count = _waitingContent.NumberOfLines() / 2;
+			}
+
+			if (count >= _bufferSize)
+			{
+				_contentSemaphore.Release();
+			}
+
+			_worker.Start();
+		}
+
 		private void StoreBuffer(string bufferContent)
 		{
 			_storage.Save(bufferContent);

@@ -8,9 +8,12 @@ namespace Ideine.LogsSender.Senders.Queues
 	{
 		private readonly BackgroundExponentialQueueWorker<ILogEntry> _worker;
 
+		private readonly BackgroundExponentialQueueWorker<string> _rawWorker;
+
 		protected BaseBackOffQueueLogSender()
 		{
 			_worker = new BackgroundExponentialQueueWorker<ILogEntry>(Send);
+			_rawWorker = new BackgroundExponentialQueueWorker<string>(Send);
 		}
 
 		public void Enqueue(ILogEntry entry)
@@ -18,6 +21,13 @@ namespace Ideine.LogsSender.Senders.Queues
 			_worker.Queue(entry);
 		}
 
+        public void Enqueue(string rawJsonEntry)
+        {
+			_rawWorker.Queue(rawJsonEntry);
+		}
+
 		protected abstract Task<bool> Send(ILogEntry entry);
+
+		protected abstract Task<bool> Send(string rawJsonEntry);
 	}
 }
