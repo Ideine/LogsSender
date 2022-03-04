@@ -119,12 +119,12 @@ namespace Ideine.LogsSender.Senders.Queues
 			_worker.Start();
 		}
 
-		public async void Enqueue(string rawEntry)
+		public async void Enqueue(string rawJsonEntry)
 		{
 			int count;
 			using (await _stringBuilderMutex.LockAsync())
 			{
-				_waitingContent.AppendLine(rawEntry);
+				_waitingContent.AppendLine(rawJsonEntry);
 
 				StoreBuffer(_waitingContent.ToString());
 

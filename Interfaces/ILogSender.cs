@@ -11,6 +11,6 @@ namespace Ideine.LogsSender.Interfaces
 	{
 		void Enqueue(ILogEntry entry);
 
-		void Enqueue(string rawEntry);
+		void Enqueue(string rawJsonEntry);
 	}
 }

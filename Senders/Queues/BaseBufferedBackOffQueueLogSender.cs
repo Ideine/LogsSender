@@ -21,9 +21,9 @@ namespace Ideine.LogsSender.Senders.Queues
 			_worker.Queue(entry);
 		}
 
-        public void Enqueue(string rawEntry)
+        public void Enqueue(string rawJsonEntry)
         {
-			_rawWorker.Queue(rawEntry);
+			_rawWorker.Queue(rawJsonEntry);
 		}
 
 		protected abstract Task<bool> Send(IReadOnlyList<ILogEntry> entries);

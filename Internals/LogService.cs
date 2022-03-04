@@ -46,9 +46,9 @@ namespace Ideine.LogsSender.Internals
 			_sender.Enqueue(entry);
 		}
 
-		public void LogRaw(string rawEntry)
+		public void LogRaw(string rawJsonEntry)
         {
-			_sender.Enqueue(rawEntry);
+			_sender.Enqueue(rawJsonEntry);
 		}
 	}
 }

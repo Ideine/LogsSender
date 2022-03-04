@@ -21,9 +21,9 @@ namespace Ideine.LogsSender.Internals
 			_service.Log(level, _index, _type, fillLogEntry);
 		}
 
-		public void LogRaw(string rawEntry)
+		public void LogRaw(string rawJsonEntry)
 		{
-			_service.LogRaw(rawEntry);
+			_service.LogRaw(rawJsonEntry);
 		}
 
 		public IContextLogService WithAppender(ILogAppender appender)

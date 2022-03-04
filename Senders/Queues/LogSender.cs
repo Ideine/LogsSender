@@ -80,7 +80,7 @@ namespace Ideine.LogsSender.Senders.Queues
 			_worker.Start();
 		}
 
-		public async void Enqueue(string rawEntry)
+		public async void Enqueue(string rawJsonEntry)
 		{
 			using (await _stringBuilderMutex.LockAsync())
 			{
@@ -90,7 +90,7 @@ namespace Ideine.LogsSender.Senders.Queues
 					_contentSemaphore.Release();
 				}
 
-				_waitingContent.AppendLine(rawEntry);
+				_waitingContent.AppendLine(rawJsonEntry);
 
 				StoreBuffer(_waitingContent.ToString());
 			}
