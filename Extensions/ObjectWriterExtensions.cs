@@ -67,5 +67,13 @@ namespace Ideine.LogsSender.Extensions
 		{
 			return writer.WriteObject(property, x => x.WriteProperty("file", file).WriteProperty("line", line).WriteProperty("member", member));
 		}
+
+		public static void LogException(this IContextLogService contextLogService, LogLevel logLevel, Exception ex, string message)
+		{
+			contextLogService.Log(logLevel, x => x
+				.WriteException("exception", ex)
+				.WriteMethodInfo("context")
+				.WriteProperty("message", message));
+		}
 	}
 }

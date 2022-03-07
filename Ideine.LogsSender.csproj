@@ -6,7 +6,7 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <PackageVersion>0.2.4</PackageVersion>
+        <PackageVersion>0.2.5</PackageVersion>
         <PackageId>Ideine.LogsSender</PackageId>
         <Title>Ideine.LogsSender</Title>
         <Authors>Valentin Jubert</Authors>
@@ -16,7 +16,7 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageProjectUrl>https://github.com/Ideine/LogsSender</PackageProjectUrl>
         <PackageTags>logs;elasticsearch</PackageTags>
-        <PackageReleaseNotes>Allow raw log entry to be send</PackageReleaseNotes>
+        <PackageReleaseNotes>Add LogException to Extensions</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
