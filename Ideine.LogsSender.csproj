@@ -6,7 +6,7 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <PackageVersion>0.2.6</PackageVersion>
+        <PackageVersion>0.2.7</PackageVersion>
         <PackageId>Ideine.LogsSender</PackageId>
         <Title>Ideine.LogsSender</Title>
         <Authors>Valentin Jubert</Authors>
@@ -20,7 +20,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <None Include="LICENSE" Pack="true" PackagePath="" />
     </ItemGroup>
 
