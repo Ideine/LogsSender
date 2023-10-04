@@ -6,21 +6,22 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <PackageVersion>0.2.5</PackageVersion>
+        <PackageVersion>0.2.6</PackageVersion>
         <PackageId>Ideine.LogsSender</PackageId>
         <Title>Ideine.LogsSender</Title>
         <Authors>Valentin Jubert</Authors>
         <Description>Logs sender for ElasticSearch</Description>
         <Copyright>Copyright 2019</Copyright>
-        <PackageLicenseUrl>https://github.com/Ideine/LogsSender/LICENSE</PackageLicenseUrl>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageProjectUrl>https://github.com/Ideine/LogsSender</PackageProjectUrl>
         <PackageTags>logs;elasticsearch</PackageTags>
-        <PackageReleaseNotes>Add LogException to Extensions</PackageReleaseNotes>
+        <PackageReleaseNotes>Fix license url</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <None Include="LICENSE" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>
