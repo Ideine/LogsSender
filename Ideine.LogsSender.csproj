@@ -6,7 +6,7 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <PackageVersion>0.2.7</PackageVersion>
+        <PackageVersion>0.2.8</PackageVersion>
         <PackageId>Ideine.LogsSender</PackageId>
         <Title>Ideine.LogsSender</Title>
         <Authors>Valentin Jubert</Authors>
@@ -16,7 +16,7 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageProjectUrl>https://github.com/Ideine/LogsSender</PackageProjectUrl>
         <PackageTags>logs;elasticsearch</PackageTags>
-        <PackageReleaseNotes>Fix license url</PackageReleaseNotes>
+        <PackageReleaseNotes>Add "Fields" and "Level" to LogEntry</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
