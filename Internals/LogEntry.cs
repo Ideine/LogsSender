@@ -10,11 +10,17 @@ namespace Ideine.LogsSender.Internals
 
 		public string Content { get; }
 
-		public LogEntry(string index, string type, string content)
+		public string Fields { get; }
+
+		public LogLevel Level { get; }
+
+		public LogEntry(string index, string type, string content, string fields, LogLevel level)
 		{
 			Index = index;
 			Type = type;
 			Content = content;
+			Fields = fields;
+			Level = level;
 		}
 	}
 }

@@ -5,5 +5,7 @@ namespace Ideine.LogsSender.Interfaces
 		string Index { get; }
 		string Type { get; }
 		string Content { get; }
+		string Fields { get; }
+		LogLevel Level { get; }
 	}
 }

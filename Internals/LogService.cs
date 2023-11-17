@@ -35,19 +35,20 @@ namespace Ideine.LogsSender.Internals
 			IObjectWriter content = new JsonLogWriter();
 			content.WriteObject("Fields", fillLogEntry);
 			content.WriteProperty("LogLevel", level.ToString());
-			
+
 			foreach (var appender in _appenders)
 			{
 				appender.Append(content);
 			}
 
-			var json = content.ToString();
-			var entry = new LogEntry(index, type, json);
+			string json = content.ToString();
+			string fields = ((IObjectWriter) new JsonLogWriter()).WriteObject("Fields", fillLogEntry).ToString();
+			LogEntry entry = new LogEntry(index, type, json, fields, level);
 			_sender.Enqueue(entry);
 		}
 
 		public void LogRaw(string rawJsonEntry)
-        {
+		{
 			_sender.Enqueue(rawJsonEntry);
 		}
 	}
