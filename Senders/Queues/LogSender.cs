@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ideine.LogsSender.Extensions;
@@ -111,8 +112,9 @@ namespace Ideine.LogsSender.Senders.Queues
 					{
 						contentToSend = _waitingContent.ToString();
 					}
-
-					if (await _sender.Send(contentToSend))
+					
+					SendResult sendResult = await _sender.SendWithStatus(contentToSend);
+					if (sendResult.IsSuccess)
 					{
 						using (await _stringBuilderMutex.LockAsync())
 						{
@@ -132,8 +134,15 @@ namespace Ideine.LogsSender.Senders.Queues
 					}
 					else
 					{
-						await _backOffStrategy.Wait();
-						_contentSemaphore.Release();
+						if (sendResult.StatusCode == HttpStatusCode.BadRequest)
+						{
+							_contentSemaphore.Release();
+						}
+						else
+						{
+							await _backOffStrategy.Wait();
+							_contentSemaphore.Release();
+						}
 					}
 				}
 			}

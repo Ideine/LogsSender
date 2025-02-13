@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Ideine.LogsSender.Senders.HttpSenders
 		Task<bool> Send(ILogEntry entry);
 		Task<bool> Send(IReadOnlyList<ILogEntry> entries);
 		Task<bool> Send(string entries);
+		Task<SendResult> SendWithStatus(string entries);
 	}
 
 	public class HttpClientSender : IHttpSender
@@ -59,6 +61,25 @@ namespace Ideine.LogsSender.Senders.HttpSenders
 			}
 
 			return false;
+		}
+		
+		public async Task<SendResult> SendWithStatus(string entries)
+		{
+			try
+			{
+				using (StringContent stringContent = new StringContent(entries, Encoding.UTF8, "text/plain"))
+				using (HttpResponseMessage result = await _client.PostAsync(_url, stringContent))
+				{
+					return new SendResult() { IsSuccess = result.IsSuccessStatusCode, StatusCode = result.StatusCode };
+				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Trace.WriteLine("IDEINE.LOGSSENDER : Exception while sending logs :");
+				System.Diagnostics.Trace.WriteLine(ex);
+			}
+
+			return new SendResult() { IsSuccess = false, StatusCode = HttpStatusCode.InternalServerError };
 		}
 	}
 }
