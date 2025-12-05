@@ -139,6 +139,12 @@ namespace Ideine.LogsSender.Senders.Queues
 			_worker.Start();
 		}
 
+		public void Flush()
+		{
+			_contentSemaphore.Release();
+			_worker.Start();
+		}
+
 		private void StoreBuffer(string bufferContent)
 		{
 			_storage.Save(bufferContent);

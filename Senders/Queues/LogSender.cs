@@ -150,6 +150,12 @@ namespace Ideine.LogsSender.Senders.Queues
 			// ReSharper disable once FunctionNeverReturns
 		}
 
+		public void Flush()
+		{
+			_contentSemaphore.Release();
+			_worker.Start();
+		}
+
 		private void StoreBuffer(string bufferContent)
 		{
 			_storage.Save(bufferContent);
