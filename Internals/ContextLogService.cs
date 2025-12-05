@@ -26,6 +26,11 @@ namespace Ideine.LogsSender.Internals
 			_service.LogRaw(rawJsonEntry);
 		}
 
+		public void Flush()
+		{
+			_service.Flush();
+		}
+
 		public IContextLogService WithAppender(ILogAppender appender)
 		{
 			_service.WithAppender(appender);

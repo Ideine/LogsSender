@@ -28,5 +28,7 @@ namespace Ideine.LogsSender.Senders.Queues
 
 		protected abstract Task<bool> Send(IReadOnlyList<ILogEntry> entries);
 		protected abstract Task<bool> Send(IReadOnlyList<string> rawEntries);
+		
+		public abstract void Flush();
 	}
 }

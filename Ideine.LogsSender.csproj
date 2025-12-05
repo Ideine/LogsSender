@@ -6,7 +6,7 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <PackageVersion>0.2.9</PackageVersion>
+        <PackageVersion>0.2.10</PackageVersion>
         <PackageId>Ideine.LogsSender</PackageId>
         <Title>Ideine.LogsSender</Title>
         <Authors>Valentin Jubert</Authors>
@@ -16,7 +16,7 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageProjectUrl>https://github.com/Ideine/LogsSender</PackageProjectUrl>
         <PackageTags>logs;elasticsearch</PackageTags>
-        <PackageReleaseNotes>Make LoggerFactory.CreateCustom public</PackageReleaseNotes>
+        <PackageReleaseNotes>Add a Flush method to send logs waiting in buffer if buffer size is not reached yet</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>

@@ -8,6 +8,8 @@ namespace Ideine.LogsSender.Interfaces
 
 		void LogRaw(string rawJsonEntry);
 
+		void Flush();
+
 		ILogService WithAppender(ILogAppender appender);
 
 		IContextLogService CreateContext(string index, string type);

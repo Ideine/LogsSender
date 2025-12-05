@@ -29,5 +29,7 @@ namespace Ideine.LogsSender.Senders.Queues
 		protected abstract Task<bool> Send(ILogEntry entry);
 
 		protected abstract Task<bool> Send(string rawJsonEntry);
+		
+		public abstract void Flush();
 	}
 }

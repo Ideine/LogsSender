@@ -50,5 +50,10 @@ namespace Ideine.LogsSender.Internals
         {
 			_sender.Enqueue(rawJsonEntry);
 		}
+
+		public void Flush()
+		{
+			_sender.Flush();
+		}
 	}
 }

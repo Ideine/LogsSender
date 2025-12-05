@@ -22,5 +22,7 @@ namespace Ideine.LogsSender.Senders.Queues
 		{
 			return _client.Send(rawJsonEntry);
 		}
+
+		public override void Flush() { }
 	}
 }

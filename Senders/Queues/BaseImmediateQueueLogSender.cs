@@ -27,5 +27,7 @@ namespace Ideine.LogsSender.Senders.Queues
 
 		protected abstract Task Send(ILogEntry entry);
 		protected abstract Task Send(string entry);
+
+		public abstract void Flush();
 	}
 }
